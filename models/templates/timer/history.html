@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center task_name">
+  <h1 class="display-4">{% block title %}History{% endblock %}</h1>
+  </div>
+{% endblock %}
+{% block content %}
+
+{% for item in work_history %}
+	<p>{{ item['task'] }}</p>
+{% endfor %}
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+
+{% endblock %}

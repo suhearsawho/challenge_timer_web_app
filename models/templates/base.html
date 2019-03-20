@@ -16,6 +16,8 @@
   	<ul>
 	    {% if g.user %}
 	      <li><span>{{ g.user['username'] }}</span>
+        <li><a href="{{ url_for('timer.index') }}">New Challenge</a>
+        <li><a href="{{ url_for('timer.history', id=g.user['id']) }}">History</a>
 	      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
 	    {% else %}
 	      <li><a href="{{ url_for('auth.register') }}">Register</a>

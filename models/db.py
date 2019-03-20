@@ -49,3 +49,7 @@ def init_app(app):
     app.teardown_appcontext(close_db)
     # Adds a new command that can be called with flask command
     app.cli.add_command(init_db_command)
+
+def make_dicts(cursor, row):
+    return dict((cursor.description[idx][0], value)
+                for idx, value in enumerate(row))

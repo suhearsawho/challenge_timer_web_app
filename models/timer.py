@@ -5,6 +5,7 @@ from werkzeug.exceptions import abort
 
 from models.auth import login_required
 from models.db import get_db
+from models.db import make_dicts
 
 bp = Blueprint('timer', __name__)
 
@@ -47,6 +48,24 @@ def challenges(task=None, time=25):
     # TODO redirect to index when timer is complete
     return render_template('timer/challenges.html', task=task, time=time)
 
+@bp.route('/history/<int:id>', methods=('GET', 'POST'))
+@login_required
+def history(id):
+    db = get_db()
+    cursor = db.execute(
+        'SELECT task, time_allocated, complete'
+        ' FROM challenges'
+        ' WHERE author_id = ?',
+        (id,)
+    )
+    rows = cursor.fetchall()
+        
+    # Need to return a list of dictionaries with all the entries
+    values = []
+    for row in rows:
+        values.append(make_dicts(cursor, row))
+    cursor.close()
+    return render_template('timer/history.html', work_history=values)
 
 def all_int(text):
     for char in text:
