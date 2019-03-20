@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center task_name">
+  <h1 class="display-4">{% block title %}{{ task }}{% endblock %}</h1>
+  </div>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+	<div class="card mb-4 shadow-sm">
+		<div class="card-header">
+			<button type="button" class="btn btn-lg btn-block btn-outline-primary" onclick="countdown({{ time }})">Begin!</button>
+		</div>
+		<div class="card-body timer">
+			<div class="card-body time_display" id="minutes">
+				<p>{{ time }}</p>
+			</div>
+			<div class="card-body colon">
+				<p>:</p>
+			</div>
+			<div class="card-body time_display" id="seconds">
+				<p>00</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="card mb-4 shadow-sm">
+		<div class="card-header add_time">
+			<button type="button" class="btn btn-lg btn-outline-primary">
+				Add 5 Minutes
+			</button>
+			<button type="button" class="btn btn-lg btn-outline-primary">
+				Add 15 Minutes
+			</button>
+		</div>
+		<div class="card-header complete">
+			<button type="button" class="btn btn-lg btn-outline-primary">
+				Finished!
+			</button>
+		</div>
+	</div>
+</div>
+
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+
+{% endblock %}
