@@ -1,7 +1,4 @@
-html { background: #80BD9E; padding: 1rem; }
-
 body { 
-    max-width: 960px; 
     margin: 0 auto; 
     display: flex;
     flex-direction: column;
