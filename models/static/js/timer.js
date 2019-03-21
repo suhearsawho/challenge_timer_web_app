@@ -2,14 +2,13 @@
 var minutes = document.getElementById("minutes");
 var seconds = document.getElementById("seconds");
 var on_off = document.getElementsByClassName("start_pause");
-var time_left = parseInt(document.getElementById("user_time").innerHTML, 10) * 60;
+var user_time = document.getElementById("user_time")
+var time_left = parseInt(user_time.innerHTML, 10) * 60;
 var timer_clock;
 
 
 function countdown() {
-	let str1 = "start";
-	let str2 = "pause";
-	if (on_off[0].id === str1)
+	if (on_off[0].id === "start")
 	{
 		document.getElementById("start").innerHTML = 'Pause';
 		document.getElementById("start").id = "pause";
@@ -42,9 +41,17 @@ function inCountdown() {
 }
 
 function add_time(value) {
-	clearInterval(timer_clock);
-	time_left = time_left + (value * 60);
-	timer_clock = setInterval(inCountdown, 1000);
+	if (on_off[0].id === "start")
+	{
+		time_left = time_left + (value * 60);
+		minutes.innerHTML = time_left / 60;
+	}
+	else
+	{
+		clearInterval(timer_clock);
+		time_left = time_left + (value * 60);
+		timer_clock = setInterval(inCountdown, 1000);
+	}
 }
 
 function finish() {
