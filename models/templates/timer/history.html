@@ -7,9 +7,22 @@
 {% endblock %}
 {% block content %}
 
-{% for item in work_history %}
-	<p>{{ item['task'] }}</p>
-{% endfor %}
+<div class="container">
+  <div class="history">
+      <div class="header_tasks">
+	<p class= "task">Name</p>
+	<p class="time_allocated">Time</p>
+	<p class="complete">Complete?</p>
+      </div>
+      {% for item in work_history %}
+      <div class="task_info">
+      	<p class="task">{{ item['task'] }}</p>
+	<p class="time_allocated">{{ item['time_allocated'] }}</p>
+	<p class="complete">{{ item['complete'] }}</p>
+      </div>
+      {% endfor %}
+  </div>
+</div>
 <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-html { font-family: Lato, sans-serif; background: #80BD9E; padding: 1rem; }
+html { background: #80BD9E; padding: 1rem; }
 
 body { 
     max-width: 960px; 
@@ -93,4 +93,39 @@ input[type=submit] { align-self: start; min-width: 10em; }
 
 .task_name {
     padding-top: 0;
+}
+
+.history {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.task_info {
+    display: flex;
+    flex-wrap: nowrap;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    box-sizing: border-box;
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+.task {
+    min-width: 50%;
+}
+
+.time_allocated {
+    min-width: 20%;
+}
+
+.complete {
+    min-width: 10%;
+}
+
+.history > .header_tasks {
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    font-size: 16px;
+    padding-left: 2%;
 }

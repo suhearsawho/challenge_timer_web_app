@@ -34,18 +34,24 @@ def index():
                 ' VALUES (?, ?, ?, ?)',
                 (challenge, time, g.user['id'], 0)
             )
-            
             db.commit()
             return redirect(url_for('timer.challenges', task=challenge, time=time))
     return render_template('timer/index.html')
 
 @bp.route('/challenges/', methods=('GET', 'POST'))
-@bp.route('/challenges/<task>/<time>', methods=('GET', 'POST'))
+@bp.route('/challenges/<task>/<time>/', methods=('GET', 'POST'))
 @login_required
 def challenges(task=None, time=25):
     if request.method == 'POST':
+        db = get_db()
+# TODO ONLY UPDATE THE SPECIFIC TASK!!!! 
+        db.execute(
+            'UPDATE challenges'
+            ' SET complete = ?',
+            (1,)
+        )
+        db.commit()
         return redirect(url_for('timer.index'));
-    # TODO redirect to index when timer is complete
     return render_template('timer/challenges.html', task=task, time=time)
 
 @bp.route('/history/<int:id>', methods=('GET', 'POST'))
