@@ -13,6 +13,7 @@ CREATE TABLE challenges (
   created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   task TEXT NOT NULL,
   time_allocated INTEGER NOT NULL,
+  time_finished INTEGER NOT NULL,
   complete TINYINT NOT NULL,
   FOREIGN KEY (author_id) REFERENCES user (id)
 )

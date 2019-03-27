@@ -28,21 +28,21 @@
 
 <div class="container">
   <div class="card mb-4 shadow-sm">
-    <div class="card-header add_time">
-      <button type="button" class="btn btn-lg btn-outline-primary" onclick="add_time(5)">
+    <form method="post">
+      <div class="card-header add_time">
+        <button type="submit" id="add_five" name="add_five" class="btn btn-lg btn-outline-primary" onclick="add_time(5)">
         Add 5 Minutes
-      </button>
-      <button type="button" class="btn btn-lg btn-outline-primary" onclick="add_time(15)">
+        </button>
+        <button type="submit" id="add_fifteen" name="add_fifteen" class="btn btn-lg btn-outline-primary" onclick="add_time(15)">
         Add 15 Minutes
-      </button>
-    </div>
-    <div class="card-header complete">
-      <form method="post">
-        <button type="submit" class="btn btn-lg btn-outline-primary" onclick="finish()">
+        </button>
+      </div>
+      <div class="card-header complete">
+        <button type="submit" name="finish" class="btn btn-lg btn-outline-primary" onclick="finish()">
           Finished!
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 </div>
 

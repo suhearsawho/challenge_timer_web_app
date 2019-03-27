@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from models.auth import login_required
 from models.db import get_db
 from models.db import make_dicts
+import json
 
 bp = Blueprint('timer', __name__)
 
@@ -30,28 +31,66 @@ def index():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO challenges (task, time_allocated, author_id, complete)'
-                ' VALUES (?, ?, ?, ?)',
-                (challenge, time, g.user['id'], 0)
+                'INSERT INTO challenges' 
+                ' (task, time_allocated, time_finished, author_id, complete)'
+                ' VALUES (?, ?, ?, ?, ?)',
+                (challenge, time, time, g.user['id'], 0)
             )
+            cursor = db.execute(
+                'SELECT last_insert_rowid()',
+            )
+            task_id = cursor.fetchone()[0]
+            cursor.close()
             db.commit()
-            return redirect(url_for('timer.challenges', task=challenge, time=time))
+            return redirect(url_for('timer.challenges', id=g.user['id'], task_id=task_id))
     return render_template('timer/index.html')
 
 @bp.route('/challenges/', methods=('GET', 'POST'))
-@bp.route('/challenges/<task>/<time>/', methods=('GET', 'POST'))
+@bp.route('/challenges/<int:id>/<int:task_id>/', methods=('GET', 'POST'))
 @login_required
-def challenges(task=None, time=25):
+def challenges(id, task_id=None):
+    # Retrieve task and time associated with task_id
+    db = get_db()
+    cursor = db.execute(
+        'SELECT task, time_allocated'
+        ' FROM challenges'
+        ' WHERE id = ?'
+        ' AND author_id = ?',
+        (task_id, id)
+    )
+    row = cursor.fetchone()
+    task = row['task']
+    time = row['time_allocated']
+
+    # Response to buttons 
     if request.method == 'POST':
-        db = get_db()
-# TODO ONLY UPDATE THE SPECIFIC TASK!!!! 
-        db.execute(
-            'UPDATE challenges'
-            ' SET complete = ?',
-            (1,)
-        )
-        db.commit()
-        return redirect(url_for('timer.index'));
+        # request.form returns an immutable dict (Part of Werkzeug)
+        button_type = list(request.form.to_dict().keys())[0]
+        if button_type == 'finish':
+            db.execute(
+                'UPDATE challenges'
+                ' SET complete = ?'
+                ' WHERE id = ?',
+                (1, task_id)
+            )
+            db.commit()
+            return redirect(url_for('timer.index'));
+        elif button_type == 'add_five':
+            db.execute(
+                'UPDATE challenges'
+                ' SET time_finished = time_finished + 5'
+                ' WHERE id = ?',
+                (task_id, )
+            )
+            db.commit()
+        elif button_type == 'add_fifteen':
+            db.execute(
+                'UPDATE challenges'
+                ' SET time_finished = time_finished + 15'
+                ' WHERE id = ?',
+                (task_id, )
+            )
+            db.commit()
     return render_template('timer/challenges.html', task=task, time=time)
 
 @bp.route('/history/<int:id>', methods=('GET', 'POST'))
@@ -59,7 +98,7 @@ def challenges(task=None, time=25):
 def history(id):
     db = get_db()
     cursor = db.execute(
-        'SELECT task, time_allocated, complete'
+        'SELECT task, time_allocated, time_finished, complete'
         ' FROM challenges'
         ' WHERE author_id = ?',
         (id,)
