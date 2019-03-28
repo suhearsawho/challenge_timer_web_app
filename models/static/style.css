@@ -112,11 +112,15 @@ input[type=submit] { align-self: start; min-width: 10em; }
 }
 
 .time_allocated {
-    min-width: 20%;
+    min-width: 15%;
+}
+
+.time_finished{
+    min-width: 15%
 }
 
 .complete {
-    min-width: 10%;
+    min-width: 5%;
 }
 
 .history > .header_tasks {

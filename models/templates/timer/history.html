@@ -18,11 +18,15 @@
       <div class="task_info">
       	<p class="task">{{ item['task'] }}</p>
 	<p class="time_allocated">{{ item['time_allocated'] }}</p>
-	<p class="complete">{{ item['complete'] }}</p>
+	<p class="time_finished">{{ item['time_finished'] }}</p>
+	<p class="complete">
+		{{ 'Yes' if item['complete'] == 1  else 'No' }}
+	</p>
       </div>
       {% endfor %}
   </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="{{ url_for('static', filename='js/timer.js') }}"></script>
 
 {% endblock %}
