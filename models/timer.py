@@ -45,7 +45,7 @@ def index():
             return redirect(url_for('timer.challenges', id=g.user['id'], task_id=task_id))
     return render_template('timer/index.html')
 
-@bp.route('/challenges/', methods=('GET', 'POST'))
+#@bp.route('/challenges/', methods=('GET', 'POST'))
 @bp.route('/challenges/<int:id>/<int:task_id>/', methods=('GET', 'POST'))
 @login_required
 def challenges(id, task_id=None):
@@ -61,7 +61,6 @@ def challenges(id, task_id=None):
     row = cursor.fetchone()
     task = row['task']
     time = row['time_allocated']
-
     # Response to buttons 
     if request.method == 'POST':
         # request.form returns an immutable dict (Part of Werkzeug)
@@ -74,24 +73,8 @@ def challenges(id, task_id=None):
                 (1, task_id)
             )
             db.commit()
-            return redirect(url_for('timer.index'));
-        elif button_type == 'add_five':
-            db.execute(
-                'UPDATE challenges'
-                ' SET time_finished = time_finished + 5'
-                ' WHERE id = ?',
-                (task_id, )
-            )
-            db.commit()
-        elif button_type == 'add_fifteen':
-            db.execute(
-                'UPDATE challenges'
-                ' SET time_finished = time_finished + 15'
-                ' WHERE id = ?',
-                (task_id, )
-            )
-            db.commit()
-    return render_template('timer/challenges.html', task=task, time=time)
+            return redirect(url_for('timer.index'))
+    return render_template('timer/challenges.html', task_id=task_id, task=task, time=time)
 
 @bp.route('/history/<int:id>', methods=('GET', 'POST'))
 @login_required
@@ -116,3 +99,36 @@ def all_int(text):
     for char in text:
         if ord(char) < ord('0') or ord(char) > ord('9'):
             return False
+
+@bp.route('/five/<int:id>/<int:task_id>/', methods=('GET', 'POST'))
+def five(id, task_id=None):
+    db = get_db()
+
+    db.execute(
+        'UPDATE challenges'
+        ' SET time_finished = time_finished + 5'
+        ' WHERE id = ?',
+        (task_id, )
+    )
+    db.commit()
+    return 'finish'
+
+@bp.route('/fifteen/<int:id>/<int:task_id>/', methods=('GET', 'POST'))
+def fifteen(id, task_id=None):
+    db = get_db()
+
+    db.execute(
+        'UPDATE challenges'
+        ' SET time_finished = time_finished + 15'
+        ' WHERE id = ?',
+        (task_id, )
+    )
+    db.commit()
+    return 'finish'
+
+# Debugging     
+@bp.route('/hi/', methods=('GET', 'POST'))
+@login_required
+def hi():
+    print('YOU ARE IN THE HI FUNCTION')
+    return 'empty'

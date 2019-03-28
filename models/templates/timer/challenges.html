@@ -30,10 +30,10 @@
   <div class="card mb-4 shadow-sm">
     <form method="post">
       <div class="card-header add_time">
-        <button type="submit" id="add_five" name="add_five" class="btn btn-lg btn-outline-primary" onclick="add_time(5)">
+        <button type="button" id="add_five" name="add_five" class="btn btn-lg btn-outline-primary" onclick="add_time(5)">
         Add 5 Minutes
         </button>
-        <button type="submit" id="add_fifteen" name="add_fifteen" class="btn btn-lg btn-outline-primary" onclick="add_time(15)">
+        <button type="button" id="add_fifteen" name="add_fifteen" class="btn btn-lg btn-outline-primary" onclick="add_time(15)">
         Add 15 Minutes
         </button>
       </div>
@@ -46,6 +46,30 @@
   </div>
 </div>
 
-<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
 
+<script src="{{ url_for('static', filename='js/timer.js') }}"></script>
+<script>
+$(function() {
+	$("#add_five").click(function() {
+		console.log('Before ajax');
+		$.ajax({
+			url: '{{ url_for('timer.five', id=g.user['id'], task_id=task_id) }}',
+			type: 'POST',
+			data: 5,
+		});
+		console.log('after ajax');
+		return false;
+	});
+	$("#add_fifteen").click(function() {
+		console.log('Before ajax');
+		$.ajax({
+			url: '{{ url_for('timer.fifteen', id=g.user['id'], task_id=task_id) }}',
+			type: 'POST',
+			data: 5,
+		});
+		console.log('after ajax');
+		return false;
+	});
+});
+</script>
 {% endblock %}
