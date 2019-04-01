@@ -80,6 +80,15 @@ def challenges(id, task_id=None):
 @login_required
 def history(id):
     db = get_db()
+    if request.method == 'POST':
+        button_type = list(request.form.to_dict().keys())[0]
+        if button_type == 'delete_all':
+            db.execute(
+                'DELETE FROM challenges'
+            )
+            db.commit()
+            return redirect(url_for('timer.history', id=g.user['id']))
+
     cursor = db.execute(
         'SELECT task, time_allocated, time_finished, complete'
         ' FROM challenges'
@@ -87,7 +96,7 @@ def history(id):
         (id,)
     )
     rows = cursor.fetchall()
-        
+
     # Need to return a list of dictionaries with all the entries
     values = []
     for row in rows:
