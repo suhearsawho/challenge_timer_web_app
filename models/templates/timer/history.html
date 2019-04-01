@@ -11,7 +11,8 @@
   <div class="history">
       <div class="header_tasks">
 	<p class= "task">Name</p>
-	<p class="time_allocated">Time</p>
+	<p class="time_allocated">Input Time</p>
+	<p class="time_finished">Actual Time</p>
 	<p class="complete">Complete?</p>
       </div>
       {% for item in work_history %}
@@ -19,9 +20,7 @@
       	<p class="task">{{ item['task'] }}</p>
 	<p class="time_allocated">{{ item['time_allocated'] }}</p>
 	<p class="time_finished">{{ item['time_finished'] }}</p>
-	<p class="complete">
-		{{ 'Yes' if item['complete'] == 1  else 'No' }}
-	</p>
+	<p class="complete">{{ 'Yes' if item['complete'] == 1  else 'No' }}</p>
       </div>
       {% endfor %}
   </div>

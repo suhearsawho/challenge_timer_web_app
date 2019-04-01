@@ -13,6 +13,7 @@ body {
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    font-family: Avenir;
 }
 
 a { color: #312c32; }
@@ -20,7 +21,7 @@ a { color: #312c32; }
 hr { border: none; border-top: 1px solid lightgray; }
 
 nav { 
-    background: #80bd9e;
+    background: #1FB58F;
     display: flex; 
     align-items: center; 
     padding: 0 0.5rem; 
@@ -108,19 +109,19 @@ input[type=submit] { align-self: start; min-width: 10em; }
 }
 
 .task {
-    min-width: 50%;
+    min-width: 40%;
 }
 
 .time_allocated {
-    min-width: 15%;
+    min-width: 20%;
 }
 
 .time_finished{
-    min-width: 15%
+    min-width: 20%
 }
 
 .complete {
-    min-width: 5%;
+    min-width: 7%;
 }
 
 .history > .header_tasks {
