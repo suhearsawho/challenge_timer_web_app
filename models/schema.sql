@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS challenges;
 
 CREATE TABLE user (
   id INTEGER PRIMARY KEY AUTOINCREMENT, 
-  username TEXT UNIQUE NOT NULL,
-  password TEXT NOT NULL
+  username VARCHAR(15) UNIQUE NOT NULL,
+  password VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE challenges (
