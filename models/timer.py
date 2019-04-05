@@ -25,6 +25,10 @@ def index():
             error = 'Time is required.'
         elif all_int(time) is False:
             error = 'Numerical value is required.'
+        
+        error = verify_challenge(challenge)
+        if error is None:
+            error = verify_time(time)
 
         if error is not None:
             flash(error)
@@ -134,6 +138,14 @@ def fifteen(id, task_id=None):
     )
     db.commit()
     return 'finish'
+
+def verify_challenge(challenge):
+    if len(challenge) > 30:
+        return 'Please limit challenge description to 30 or less characters.'
+
+def verify_time(time):
+    if int(time) > 200:
+        return 'Please limit challenge time to 200 minutes or less for max productivity.'
 
 # Debugging     
 @bp.route('/hi/', methods=('GET', 'POST'))
