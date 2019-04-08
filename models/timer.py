@@ -26,7 +26,8 @@ def index():
         elif all_int(time) is False:
             error = 'Numerical value is required.'
         
-        error = verify_challenge(challenge)
+        if error is None:
+            error = verify_challenge(challenge)
         if error is None:
             error = verify_time(time)
 
@@ -70,6 +71,8 @@ def challenges(id, task_id=None):
         # request.form returns an immutable dict (Part of Werkzeug)
         button_type = list(request.form.to_dict().keys())[0]
         if button_type == 'finish':
+            time_left = request.form['finish']
+            print(time_left)
             db.execute(
                 'UPDATE challenges'
                 ' SET complete = ?'
