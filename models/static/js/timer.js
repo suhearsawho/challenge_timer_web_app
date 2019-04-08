@@ -28,7 +28,7 @@ function inCountdown() {
 	
 	if (seconds_value < 10)
 		seconds_value = '0' + seconds_value;
-	minutes.innerHTML = minutes_value;
+	user_time.innerHTML = minutes_value;
 	seconds.innerHTML = seconds_value;
 	if (time_left == 0)
 	{
@@ -44,7 +44,7 @@ function add_time(value) {
 	if (on_off[0].id === "start")
 	{
 		time_left = time_left + (value * 60);
-		minutes.innerHTML = time_left / 60;
+		user_time.innerHTML = time_left / 60;
 	}
 	else
 	{
@@ -55,5 +55,6 @@ function add_time(value) {
 }
 
 function finish() {
+	console.log('in finish function javascript');
 	clearInterval(timer_clock);
 }
