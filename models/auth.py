@@ -32,8 +32,9 @@ def register():
             'SELECT id FROM user WHERE username = ?', (username,)
         ).fetchone() is not None:
             error = 'User {} is already registered.'.format(username)
-
-        error = verify_username(username)
+        
+        if error is None:
+            error = verify_username(username)
         if error is None:
             error = verify_password(password)
 

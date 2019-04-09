@@ -1,5 +1,5 @@
 from flask import (
-        Blueprint, flash, g, redirect, render_template, request, url_for
+        Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
 from werkzeug.exceptions import abort
 
@@ -25,6 +25,11 @@ def index():
             error = 'Time is required.'
         elif all_int(time) is False:
             error = 'Numerical value is required.'
+        
+        if error is None:
+            error = verify_challenge(challenge)
+        if error is None:
+            error = verify_time(time)
 
         if error is not None:
             flash(error)
@@ -49,6 +54,20 @@ def index():
 @bp.route('/challenges/<int:id>/<int:task_id>/', methods=('GET', 'POST'))
 @login_required
 def challenges(id, task_id=None):
+    # Response to buttons 
+    if request.method == 'POST':
+        # request.form returns an immutable dict (Part of Werkzeug)
+        time_left = int(request.form['time_left_v'])
+        print(time_left, type(time_left))
+        db = get_db()
+        db.execute(
+            'UPDATE challenges'
+            ' SET complete = ?, time_finished = time_finished - ?'
+            ' WHERE id = ?',
+            (1, time_left, task_id)
+        )
+        db.commit()
+        return jsonify(dict(redirect=url_for('timer.index')))
     # Retrieve task and time associated with task_id
     db = get_db()
     cursor = db.execute(
@@ -61,19 +80,6 @@ def challenges(id, task_id=None):
     row = cursor.fetchone()
     task = row['task']
     time = row['time_allocated']
-    # Response to buttons 
-    if request.method == 'POST':
-        # request.form returns an immutable dict (Part of Werkzeug)
-        button_type = list(request.form.to_dict().keys())[0]
-        if button_type == 'finish':
-            db.execute(
-                'UPDATE challenges'
-                ' SET complete = ?'
-                ' WHERE id = ?',
-                (1, task_id)
-            )
-            db.commit()
-            return redirect(url_for('timer.index'))
     return render_template('timer/challenges.html', task_id=task_id, task=task, time=time)
 
 @bp.route('/history/<int:id>', methods=('GET', 'POST'))
@@ -134,6 +140,14 @@ def fifteen(id, task_id=None):
     )
     db.commit()
     return 'finish'
+
+def verify_challenge(challenge):
+    if len(challenge) > 30:
+        return 'Please limit challenge description to 30 or less characters.'
+
+def verify_time(time):
+    if int(time) > 200:
+        return 'Please limit challenge time to 200 minutes or less for max productivity.'
 
 # Debugging     
 @bp.route('/hi/', methods=('GET', 'POST'))
