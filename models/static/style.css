@@ -7,17 +7,42 @@ body {
 
 .header { 
     color: black;
-    margin: 1rem 0; 
+    margin: 1rem; 
     display: flex;
     text-align: center;
-    flex-direction: column;
-    width: 100%;
     box-sizing: border-box;
     font-family: Avenir;
+    color: #6ec4db;
+    justify-content: space-between;
+}
+
+.logo {
+    width: 25%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.corner-icon {
+    margin-left: 0.2rem;
+    width: 3rem;
+}
+
+.logo p {
+    font-size: 20px;
+    margin: 0;
+    margin-left: 6%;
+}
+
+.links {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+    align-items:center;
 }
 
 a { 
-    color: #312c32; 
+    color: #6ec4db; 
 }
 
 hr { 
@@ -26,9 +51,10 @@ hr {
 }
 
 nav { 
-    background: rgba(255, 61, 37, 0.6);
+    background: white;
     display: flex; 
-    align-items: center; 
+    align-items: center;
+    justify-content: center;
     padding: 0 0.5rem; 
     width: 100%
 }
@@ -157,4 +183,14 @@ input[type=submit] { align-self: start; min-width: 10em; }
 .center-header {
     text-align: center;
     width: 100%;
+}
+
+.sign-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-header {
+    margin: 1rem;
 }

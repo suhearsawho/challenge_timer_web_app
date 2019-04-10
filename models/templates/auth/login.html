@@ -1,19 +1,20 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Log In{% endblock %}</h1>
+  <h3 class="w-100 text-center login-header">{% block title %}Log In{% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
 <body>
-  <form method="post" class="form-signin">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="username" class="sr-only">Username</label>
-    <input name="username" id="username" placeholder="Username" required class="form-control">
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
-    <!-- <input type="submit" value="Log In"> -->
-  </form>
+  <div class="sign-in">
+    <form method="post" class="form-signin w-75">
+      <label for="username" class="sr-only">Username</label>
+      <input name="username" id="username" placeholder="Username" required class="form-control">
+      <label for="password" class="sr-only">Password</label>
+      <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+	    <!-- <input type="submit" value="Log In"> -->
+    </form>
+  </div>
 </body>
 {% endblock %}

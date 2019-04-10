@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}New Challenge{% endblock %}</h1>
+  <h3 class="w-100 text-center login-header">{% block title %}New Challenge{% endblock %}</h3>
 {% endblock %}
 
 {% block content %}
-  <form method="post">
+<body>
+  <div class="sign-in">
+  <form method="post" class="w-75">
     <label for="challenge">Challenge</label>
     <input name="challenge" id="challenge" value="{{ request.form['challenge'] }}" required>
-    <label for="time">Time</label>
+    <label for="time">Time (Minutes)</label>
     <input name="time" id="time" value="{{ request.form['time'] }}" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">
       Start Challenge
     </button>
   </form>
+  </div>
+</body>
 {% endblock %}
