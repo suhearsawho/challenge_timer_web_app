@@ -2,15 +2,15 @@
 
 {% block header %}
   <div class="center-header">
-	<h1 class="display-4">{% block title %}History{% endblock %}</h1>
+	<h1 class="display-4 timer-title">{% block title %}History{% endblock %}</h1>
   </div>
 {% endblock %}
 
 {% block content %}
 
-<div class="container">
+<div class="container w-75">
   <form method="post">
-    <button class="btn btn-lg btn-primary btn-block" type="submit" name="delete_all">Reset</button>
+    <button class="btn btn-lg btn-primary btn-block button-color" type="submit" name="delete_all">Reset</button>
   </form>
 </div>
 <div class="container">
@@ -19,14 +19,14 @@
 	<p class= "task">Name</p>
 	<p class="time_allocated">Input Time</p>
 	<p class="time_finished">Actual Time</p>
-	<p class="complete">Complete?</p>
+	<p class="task-complete">Complete?</p>
       </div>
       {% for item in work_history %}
       <div class="task_info">
       	<p class="task">{{ item['task'] }}</p>
 	<p class="time_allocated">{{ item['time_allocated'] }}</p>
 	<p class="time_finished">{{ item['time_finished'] }}</p>
-	<p class="complete">{{ 'Yes' if item['complete'] == 1  else 'No' }}</p>
+	<p class="task-complete">{{ 'Yes' if item['complete'] == 1  else 'No' }}</p>
       </div>
       {% endfor %}
   </div>

@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Register{% endblock %}</h1>
+<div class="center-header">
+  <h3 class="display-4 timer-title">{% block title %}Register{% endblock %}</h1>
+</div>
 {% endblock %}
 
 {% block content %}
-  <form method="post" class="form-signin">
+<body>
+  <div class="sign-in">
+  <form method="post" class="form-signin w-75">
     <label for="username" class="sr-only">Username</label>
     <input name="username" id="username" class="form-control" placeholder="Username" required>
     <label for="password" class="sr-only">Password</label>
     <input type="password" name="password" id="password" placeholder="Password" class="form-control" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    <button class="btn btn-lg btn-primary btn-block button-color" type="submit">Register</button>
   </form>
+  </div>
+</body>
 {% endblock %}
