@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h3 class="w-100 text-center login-header">{% block title %}New Challenge{% endblock %}</h3>
+<div class="center-header">
+  <h3 class="display-4 timer-title">{% block title %}New Challenge{% endblock %}</h3>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -9,10 +11,10 @@
   <div class="sign-in">
   <form method="post" class="w-75">
     <label for="challenge">Challenge</label>
-    <input name="challenge" id="challenge" value="{{ request.form['challenge'] }}" required>
+    <input name="challenge" id="challenge" value="{{ request.form['challenge'] }}" required placeholder="Describe your challenge!">
     <label for="time">Time (Minutes)</label>
-    <input name="time" id="time" value="{{ request.form['time'] }}" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
+    <input name="time" id="time" value="{{ request.form['time'] }}" required placeholder="Time to complete your challenge">
+    <button class="btn btn-lg btn-primary btn-block button-color" type="submit">
       Start Challenge
     </button>
   </form>

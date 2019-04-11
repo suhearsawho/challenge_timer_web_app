@@ -2,15 +2,15 @@
 
 {% block header %}
   <div class="center-header">
-  	<h1 class="display-4">{% block title %}{{ task }}{% endblock %}</h1>
+  	<h1 class="display-4 timer-title">{% block title %}{{ task }}{% endblock %}</h1>
   </div>
 {% endblock %}
 {% block content %}
 
-<div class="container">
+<div class="container w-75">
   <div class="card mb-4 shadow-sm">
     <div class="card-header">
-      <button type="button" id="start" class="start_pause btn btn-lg btn-block btn-outline-primary" onclick="countdown()">Begin!</button>
+      <button type="button" id="start" class="start_pause btn btn-lg btn-block btn-outline-primary button-color" onclick="countdown()">Begin!</button>
     </div>
     <div class="card-body timer">
       <div class="card-body time_display" id="minutes">
@@ -26,19 +26,19 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container w-75">
   <div class="card mb-4 shadow-sm">
     <form method="post">
-      <div class="card-header add_time">
-        <button type="button" id="add_five" name="add_five" class="btn btn-lg btn-outline-primary" onclick="add_time(5)">
+      <div class="add_time">
+        <button type="button" id="add_five" name="add_five" class="btn btn-lg btn-outline-primary button-color" onclick="add_time(5)">
         Add 5 Minutes
         </button>
-        <button type="button" id="add_fifteen" name="add_fifteen" class="btn btn-lg btn-outline-primary" onclick="add_time(15)">
+        <button type="button" id="add_fifteen" name="add_fifteen" class="btn btn-lg btn-outline-primary button-color" onclick="add_time(15)">
         Add 15 Minutes
         </button>
       </div>
-      <div class="card-header complete">
-        <button type="button" id="finish" name="finish" class="btn btn-lg btn-outline-primary">
+      <div class="complete">
+        <button type="button" id="finish" name="finish" class="btn btn-lg btn-outline-primary button-color w-75">
           Finished!
         </button>
       </div>

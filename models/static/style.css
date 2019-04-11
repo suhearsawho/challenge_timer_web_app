@@ -130,6 +130,8 @@ input[type=submit] { align-self: start; min-width: 10em; }
     flex-wrap: nowrap;
     width: 100%;
     justify-content: space-evenly;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 .add_time button {
@@ -168,7 +170,7 @@ input[type=submit] { align-self: start; min-width: 10em; }
     min-width: 20%
 }
 
-.complete {
+.task-complete {
     min-width: 7%;
 }
 
@@ -193,4 +195,18 @@ input[type=submit] { align-self: start; min-width: 10em; }
 
 .login-header {
     margin: 1rem;
+}
+
+.timer-title {
+    font-size: 2rem;
+}
+
+.button-color {
+    background-image: linear-gradient(to right, #8860d0, #5680e9);
+    color: white;
+    border-color: #6ec4db;
+}
+
+.card-header {
+    background-color: white;
 }
