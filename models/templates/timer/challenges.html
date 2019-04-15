@@ -7,12 +7,18 @@
 {% endblock %}
 {% block content %}
 
+<audio id="alarm-audio">
+  <source src="{{ url_for('static', filename='images/alarm.mp3') }}" type="audio/mpeg">
+</audio>
 <div class="container w-75">
   <div class="card mb-4 shadow-sm">
     <div class="card-header">
       <button type="button" id="start" class="start_pause btn btn-lg btn-block btn-outline-primary button-color" onclick="countdown()">Begin!</button>
     </div>
     <div class="card-body timer">
+      <div class="progress-timer-body">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
       <div class="card-body time_display" id="minutes">
         <p id="user_time">{{ time }}</p>
       </div>
